@@ -1,8 +1,8 @@
-# minimotto: Quality Torrent Index 
+# torseek: Quality Torrent Index 
 
-![minimotto](./screenshot.png)
+![torseek](./screenshot.png)
 
-A torrent indexing service featuring individually verified torrents with active links. Minimotto also hosts a private, members-only section for exclusive content.
+A torrent indexing service featuring individually verified torrents with active links. Torseek also hosts a private, members-only section for exclusive content.
 
 ## Features Decided
 - Integrate with Jackett

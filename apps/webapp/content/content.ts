@@ -1,14 +1,14 @@
 export const siteContent = {
     structuredData: {
-        name: "minimotto",
+        name: "torseek",
         description:
             "Torrent search engine",
-        uri: "https://minimotto.com",
+        uri: "https://torseek.com",
     },
     metadata: {
-        title: "minimotto.com",
+        title: "torseek.com",
         description: "Torrent search engine",
-        titleTemplate: "%s | minimotto",
+        titleTemplate: "%s | torseek",
     },
     header: {
         menus: [

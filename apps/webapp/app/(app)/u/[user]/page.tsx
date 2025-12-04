@@ -6,7 +6,7 @@ import { User } from "better-auth";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "User Profile | minimotto",
+  title: "User Profile | torseek",
   description: "User Profile",
   icons: {
     icon: "/logo.svg",

@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/pagination";
 
 export const metadata: Metadata = {
-    title: "Bookmarks | minimotto",
+    title: "Bookmarks | torseek",
     description: "Bookmarks",
 }
 
@@ -28,7 +28,7 @@ export default async function BookmarksPage({ searchParams }: { searchParams: Pr
         <Page>
             <PageTitle>Bookmarks</PageTitle>
             <Paragraph>
-                All torrents you have bookmarked on minimotto.
+                All torrents you have bookmarked on torseek.
             </Paragraph>
 
             {"error" in (data as { error: string }) ? (

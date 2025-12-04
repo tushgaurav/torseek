@@ -156,7 +156,7 @@ export default function SearchResultsPage() {
 
   useEffect(() => {
     search(searchParams.get("q")!, Number(searchParams.get("page")) || 1);
-    document.title = `${searchParams.get("q")} | minimotto`;
+    document.title = `${searchParams.get("q")} | torseek`;
   }, [searchParams]);
 
   return (

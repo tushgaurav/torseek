@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Page, PageTitle, Paragraph, Subtitle } from "@/components/shared/page";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | minimotto",
+  title: "Terms of Service | torseek",
 };
 
 export default function TermsPage() {
@@ -12,7 +12,7 @@ export default function TermsPage() {
       <h2 className="text-sm text-muted-foreground">Last updated: 30/07/2025</h2>
 
       <Paragraph className="mt-6">
-        Welcome to minimotto ("we," "us," or "our"). minimotto is a torrent
+        Welcome to torseek ("we," "us," or "our"). torseek is a torrent
         index and search aggregator that provides users with aggregated search
         results from various private torrent trackers. By accessing or using our
         website (the "Service"), you agree to be bound by these Terms and
@@ -29,12 +29,12 @@ export default function TermsPage() {
 
       <Subtitle>1. Description of Service</Subtitle>
       <Paragraph>
-        minimotto is a search engine and index that aggregates torrent search
+        torseek is a search engine and index that aggregates torrent search
         results from multiple private torrent trackers. We do not host, store,
         or distribute any torrent files, content, or copyrighted material. Our
         Service acts solely as an aggregator, providing links to search results
         from third-party trackers. Access to these trackers may require
-        membership or invitations, which minimotto does not provide or
+        membership or invitations, which torseek does not provide or
         facilitate.
       </Paragraph>
       <Paragraph>
@@ -58,7 +58,7 @@ export default function TermsPage() {
       </Paragraph>
 
       <Subtitle>3. User Obligations and Conduct</Subtitle>
-      <Paragraph>By using minimotto, you agree to:</Paragraph>
+      <Paragraph>By using torseek, you agree to:</Paragraph>
       <ul className="list-disc pl-6 space-y-2 mb-6 max-w-[80ch]">
         <li>
           Use the Service only for lawful purposes and in compliance with all
@@ -96,17 +96,17 @@ export default function TermsPage() {
       <Subtitle>4. Intellectual Property</Subtitle>
       <Paragraph>
         The Service, including its design, text, graphics, logos, and software,
-        is owned by or licensed to minimotto and is protected by copyright,
+        is owned by or licensed to torseek and is protected by copyright,
         trademark, and other intellectual property laws. You may not copy,
         modify, distribute, or create derivative works based on the Service
         without our express written permission.
       </Paragraph>
       <Paragraph>
-        minimotto does not claim ownership over any content from third-party
+        torseek does not claim ownership over any content from third-party
         trackers. Any intellectual property rights in the aggregated search
         results belong to their respective owners. If you believe any content
         indexed by our Service infringes on your intellectual property rights,
-        please contact us at [insert contact email, e.g., legal@minimotto.com]
+        please contact us at [insert contact email, e.g., legal@torseek.com]
         with details for review.
       </Paragraph>
 
@@ -127,7 +127,7 @@ export default function TermsPage() {
 
       <Subtitle>6. Limitation of Liability</Subtitle>
       <Paragraph>
-        To the fullest extent permitted by law, minimotto, its affiliates,
+        To the fullest extent permitted by law, torseek, its affiliates,
         officers, directors, employees, and agents shall not be liable for any
         direct, indirect, incidental, special, consequential, or punitive damages
         of any kind arising from or related to your use of the Service, including
@@ -135,7 +135,7 @@ export default function TermsPage() {
         other damages whatsoever.
       </Paragraph>
       <Paragraph>
-        minimotto provides this Service free of charge and assumes no liability
+        torseek provides this Service free of charge and assumes no liability
         whatsoever. Our total liability to you for any claim arising from these
         Terms or the Service shall be zero ($0). You use the Service entirely at
         your own risk and expense.
@@ -149,7 +149,7 @@ export default function TermsPage() {
       
       <Subtitle>7. Indemnification</Subtitle>
       <Paragraph>
-        You agree to indemnify, defend, and hold harmless minimotto, its
+        You agree to indemnify, defend, and hold harmless torseek, its
         affiliates, officers, directors, employees, and agents from any claims,
         liabilities, damages, losses, and expenses (including reasonable
         attorneys' fees) arising from or related to:
@@ -200,10 +200,10 @@ export default function TermsPage() {
       <Subtitle>11. Contact Us</Subtitle>
       <Paragraph>
         If you have any questions about these Terms, please contact us at
-        minimotto@tushgaurav.in or via our contact form on the website.
+        torseek@tushgaurav.in or via our contact form on the website.
       </Paragraph>
       <Paragraph>
-        By using minimotto, you acknowledge that you have read, understood, and
+        By using torseek, you acknowledge that you have read, understood, and
         agree to these Terms and Conditions.
       </Paragraph>
     </Page>

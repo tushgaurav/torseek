@@ -73,7 +73,7 @@ export default function AuthPage() {
                                 <div className="w-6 h-6 bg-foreground flex items-center justify-center rotate-[15deg]">
                                     <div className="w-3 h-3 bg-background" />
                                 </div>
-                                <span className="text-xl font-bold text-foreground">minimotto</span>
+                                <span className="text-xl font-bold text-foreground">torseek</span>
                             </div>
                         </div> */}
                         {/* <div className="relative z-10 flex items-center justify-center w-full">

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Page, PageTitle, Paragraph } from "@/components/shared/page";
 
 export const metadata : Metadata = {
-    title: "How to Torrent - minimotto"
+    title: "How to Torrent - torseek"
 }
 
 export default function HowToTorrentPage() {
