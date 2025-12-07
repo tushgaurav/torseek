@@ -3,7 +3,7 @@ export const siteContent = {
         name: "torseek",
         description:
             "Torrent search engine",
-        uri: "https://torseek.com",
+        uri: "https://torseek.org",
     },
     metadata: {
         title: "torseek.com",
