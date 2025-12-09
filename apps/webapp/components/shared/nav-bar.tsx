@@ -1,6 +1,5 @@
 "use client";
 
-import * as motion from "motion/react-client";
 import Link from "next/link";
 import {
   NavigationMenu,
@@ -26,29 +25,11 @@ export default function NavBar() {
       <div className="flex px-6 py-4 items-center gap-4 max-w-screen-2xl mx-auto justify-between">
         <div className="flex gap-4">
           <Link href="/" className="p-1">
-            <motion.svg
-              height="30"
-              width="30"
-              viewBox="0 0 40 40"
-              className="rotate-[12deg]"
-              animate={{ rotate: 180 }}
-              transition={{ duration: 1, ease: "linear" }}
-              whileHover={{
-                rotate: -180,
-                transition: { duration: 0.5, ease: "linear" },
-              }}
+            <span
+              className="text-2xl font-bold tracking-tighter hover:text-primary transition-colors"
             >
-              <rect
-                stroke="currentColor"
-                fill="none"
-                strokeWidth="22"
-                x="0"
-                y="0"
-                width="40"
-                height="40"
-              />
-              <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" fill="currentColor" fontSize="12" className="text-black dark:text-white">M</text>
-            </motion.svg>
+              torseek
+            </span>
           </Link>
 
           <NavigationMenu>
