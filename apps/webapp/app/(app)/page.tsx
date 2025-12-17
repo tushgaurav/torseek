@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { siteContent } from "@/content/content";
 
 import Image from "next/image";
-import background from "./bg.png";
+import background from "./bg.jpg";
 
 export const metadata: Metadata = {
   title: `${siteContent.structuredData.name} - ${siteContent.metadata.description}`,
