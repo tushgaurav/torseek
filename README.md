@@ -1,16 +1,17 @@
-# minimotto: Modern Torrent Search Client
+# torseek: Modern Torrent Search Client
 
-![screenshot](./assets/images/frontend_screenshot.png)
+![screenshot](./assets/images/search_page.png)
 
-A torrent indexing service featuring individually verified torrents with active links. Minimotto also hosts a private, members-only section for exclusive content.
+Blog Post - [tushgaurav.com](https://www.tushgaurav.com/projects/torseek)
+
+A torrent indexing service featuring individually verified torrents with active links. torseek also hosts a private, members-only section for exclusive content.
 
 ## Architecture
 
-- **Backend**: FastAPI (Python) - REST API with torrent processing
-- **Frontend**: Next.js (TypeScript) - Modern React-based web interface
-- **Database**: PostgreSQL - User data, torrent metadata, and indexing
-- **Integration**: Jackett API for torrent aggregation
-- **Deployment**: Docker & Docker Compose
+- **Backend**: FastAPI and Jackett
+- **Frontend**: Next.js, Better-Auth, shadcn/ui
+- **Database**: PostgreSQL on neon
+- **Deployment**: Compute Engine on GCP
 
 ## Project Structure
 
@@ -61,8 +62,8 @@ minimotto/
 ### Using Docker (Recommended)
 
 ```bash
-git clone https://github.com/yourusername/minimotto.git
-cd minimotto
+git clone https://github.com/yourusername/torseek.git
+cd torseek
 docker-compose up --build
 ```
 
@@ -74,8 +75,8 @@ Access the application:
 ### Local Development
 
 ```bash
-git clone https://github.com/yourusername/minimotto.git
-cd minimotto
+git clone https://github.com/yourusername/torseek.git
+cd torseek
 npm install
 cp .env.example .env
 # Edit .env with your configuration
@@ -119,7 +120,7 @@ Create a `.env` file in the root directory:
 
 ```env
 # Database
-DATABASE_URL=postgresql://user:password@localhost:5432/minimotto
+DATABASE_URL=postgresql://user:password@localhost:5432/torseek
 
 # API Configuration
 SECRET_KEY=your-super-secret-jwt-key
@@ -131,7 +132,7 @@ JACKETT_API_KEY=your-jackett-api-key
 
 # Frontend Configuration
 NEXT_PUBLIC_API_URL=http://localhost:8000
-NEXT_PUBLIC_APP_NAME=minimotto
+NEXT_PUBLIC_APP_NAME=torseek
 
 # File Storage
 UPLOAD_DIR=./uploads
@@ -229,8 +230,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-- [Report Issues](https://github.com/yourusername/minimotto/issues)
-- [Discussions](https://github.com/yourusername/minimotto/discussions)
+- [Report Issues](https://github.com/yourusername/torseek/issues)
+- [Discussions](https://github.com/yourusername/torseek/discussions)
 
 ---
 
