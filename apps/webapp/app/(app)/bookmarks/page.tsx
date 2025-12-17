@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/pagination";
 
 export const metadata: Metadata = {
-    title: "Bookmarks | torseek",
+    title: "Bookmarks - torseek",
     description: "Bookmarks",
 }
 

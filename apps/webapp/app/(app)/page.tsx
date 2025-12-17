@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { siteContent } from "@/content/content";
 
 import Image from "next/image";
-import background from "./_images/bg.png";
+import background from "./bg.png";
 
 export const metadata: Metadata = {
   title: `${siteContent.structuredData.name} - ${siteContent.metadata.description}`,
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <Page className="flex flex-col items-center justify-center flex-grow w-full">
-      <Image src={background} alt="background" fill className="absolute inset-0 object-cover -z-10" />
+      <Image src={background} alt="background" fill className="absolute opacity-50 inset-0 object-cover -z-10" />
       <Doodle />
       <Search />
     </Page>

@@ -3,7 +3,7 @@ import { siteContent } from "@/content/content";
 
 export default function Footer() {
   return (
-    <div className="mt-auto border-t-2 dark:border-accent border-secondary">
+    <div className="mt-auto border-t-2 dark:border-accent border-secondary bg-background">
       <div className="flex px-6 py-4 items-center gap-4 max-w-screen-2xl mx-auto justify-between">
         <p className="text-sm text-muted-foreground p-4">
           © {new Date().getFullYear()} {siteContent.structuredData.name}.

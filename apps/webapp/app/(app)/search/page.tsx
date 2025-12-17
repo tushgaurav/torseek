@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { Page } from "@/components/shared/page";
 
 export const metadata: Metadata = {
-    title: "Search | torseek",
+    title: "Search - torseek",
     description: "Search for a movie",
     icons: {
         icon: "/logo.svg",

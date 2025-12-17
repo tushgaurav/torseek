@@ -27,7 +27,8 @@ import SearchResultCards, {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { search } from "../action";
+import { search as searchAction } from "../action";
+import { useSession } from "@/lib/auth-client";
 
 function NoSearchResults({ searchQuery }: { searchQuery: string }) {
   return (
@@ -105,6 +106,7 @@ export default function SearchResultsPage() {
   const [searchTerm, setSearchTerm] = useState(searchParams.get("q") || "");
   const [sortBy, setSortBy] = useState<SortBy>("none");
   const router = useRouter();
+  const { data: session } = useSession();
 
   const sort = (searchResults: SearchResultCardsProps[], sortBy: SortBy) => {
     if (sortBy === "seeders_asc") {
@@ -143,7 +145,7 @@ export default function SearchResultsPage() {
 
   const search = async (query: string, page: number = 1) => {
     setLoading(true);
-    const data = await search(query, page);
+    const data = await searchAction(query, page);
   
     console.log({ data });
     setSearchResults({
@@ -156,7 +158,7 @@ export default function SearchResultsPage() {
 
   useEffect(() => {
     search(searchParams.get("q")!, Number(searchParams.get("page")) || 1);
-    document.title = `${searchParams.get("q")} | torseek`;
+    document.title = `${searchParams.get("q")} - torseek Search`;
   }, [searchParams]);
 
   return (
@@ -181,11 +183,13 @@ export default function SearchResultsPage() {
           <Mic className="size-6 mr-4 text-muted-foreground hover:text-secondary-foreground transition-colors duration-300" />
         </div>
 
-        <Link href={"/bookmarks"} className="max-w-xs">
+        {session && (
+          <Link href={"/bookmarks"} className="max-w-xs">
             <div className="text-sm font-bold text-muted-foreground hover:text-secondary-foreground transition-colors duration-300">
-            Bookmarks
+              Bookmarks
             </div>
-        </Link>
+          </Link>
+        )}
       </div>
 
       {/* Sorting */}
