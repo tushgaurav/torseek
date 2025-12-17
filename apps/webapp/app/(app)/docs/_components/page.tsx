@@ -18,7 +18,7 @@ interface DocsLayoutProps {
 export function DocsLayout({ children,  breadcrumbs }: DocsLayoutProps) {
   return (
     <div className="min-h-screen bg-background">
-      <div className="flex">
+      <div className="flex max-w-screen-xl mx-auto">
         <DocsSidebar />
         <main className="flex-1">
           <div className="max-w-4xl mx-auto px-6 py-8">

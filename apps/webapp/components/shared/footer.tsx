@@ -6,8 +6,9 @@ async function getGeolocation() {
   const headersList = await headers()
   const countryCode = headersList.get('X-Vercel-IP-Country')
   const city = headersList.get('X-Vercel-IP-City')
+  const ip = headersList.get('X-Real-IP')
   
-  return { countryCode, city }
+  return { countryCode, city, ip }
 }
 
 export default async function Footer() {
@@ -17,6 +18,7 @@ export default async function Footer() {
       <div className="px-6 border-b-1 dark:border-accent border-secondary">
         <div className="flex gap-4 px-6 justify-between max-w-screen-2xl mx-auto items-center py-4">
           <span className="text-sm text-muted-foreground font-bold">{geolocation.city}, {geolocation.countryCode}</span>
+          <span className="text-sm text-muted-foreground font-bold">{geolocation.ip}</span>
         </div>
       </div>
 

@@ -18,9 +18,6 @@ const docsNavigation: DocsSidebarItem[] = [
   {
     title: "Getting Started",
     items: [
-      { title: "Installation", href: "/docs/installation" },
-      { title: "Quick Start", href: "/docs/quick-start" },
-      { title: "Configuration", href: "/docs/configuration" },
     ],
   },
   {
@@ -28,24 +25,15 @@ const docsNavigation: DocsSidebarItem[] = [
     items: [
       { title: "The Pirate Bay", href: "/docs/trackers/the-pirate-bay" },
       { title: "YTS", href: "/docs/trackers/yts" },
-      { title: "1337x", href: "/docs/trackers/1337x" },
       { title: "RARBG", href: "/docs/trackers/rarbg" },
-      { title: "EZTV", href: "/docs/trackers/eztv" },
-      { title: "Torlock", href: "/docs/trackers/torlock" },
-      { title: "Torren.to", href: "/docs/trackers/torren.to" },
-      { title: "1337x", href: "/docs/trackers/1337x" },
-      { title: "RARBG", href: "/docs/trackers/rarbg" },
-      { title: "EZTV", href: "/docs/trackers/eztv" },
-      { title: "Torlock", href: "/docs/trackers/torlock" },
       { title: "Torren.to", href: "/docs/trackers/torren.to" },
     ],
   },
   {
     title: "Guides",
     items: [
-      { title: "Deployment", href: "/docs/guides/deployment" },
       { title: "Best Practices", href: "/docs/guides/best-practices" },
-      { title: "Troubleshooting", href: "/docs/guides/troubleshooting" },
+      { title: "Be Safe", href: "/docs/guides/be-safe" },
     ],
   },
 ]
@@ -107,7 +95,7 @@ function NavItemComponent({ item, level = 0 }: NavItemProps) {
 
 export function DocsSidebar() {
   return (
-    <div className="w-64 border-r border-sidebar-border bg-sidebar">
+    <div className="w-64 border-l border-r border border-sidebar-border bg-sidebar">
       <div className="p-4 border-b border-sidebar-border">
         <h2 className="font-semibold text-sidebar-foreground">Documentation</h2>
       </div>
