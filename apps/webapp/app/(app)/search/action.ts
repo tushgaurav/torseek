@@ -89,11 +89,11 @@ export async function search(query: string, page: number = 1) {
   if (session) {
     await db.insert(userStats).values({
       userId: session.user.id,
-      totalSearches: sql`total_searches + 1`,
+      totalSearches: 1,
     }).onConflictDoUpdate({
       target: [userStats.userId],
       set: {
-        totalSearches: sql`total_searches + 1`,
+        totalSearches: sql`${userStats.totalSearches} + 1`,
       },
     });
   }
