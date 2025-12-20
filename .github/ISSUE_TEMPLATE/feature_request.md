@@ -1,5 +1,5 @@
 ---
-name: Request a new feature
+name: Request a Feature
 about: Create a feature request for torseek
 ---
 
