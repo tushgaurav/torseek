@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { signIn, signUp } from "@/lib/auth-client"
 import Image from "next/image"
+import { sendVerifyEmail } from "./actions"
 
 export default function AuthPage() {
     const [isLogin, setIsLogin] = useState(true)
@@ -106,7 +107,7 @@ export default function AuthPage() {
                             {/* Header */}
                             <div className="text-center space-y-2">
                                 <h1 className="text-3xl font-bold text-foreground">
-                                    {isLogin ? "Sign In" : "Create Account"}
+                                    {isLogin ? "Login" : "Create Account"}
                                 </h1>
                                 <p className="text-muted-foreground">
                                     {isLogin
@@ -246,7 +247,7 @@ export default function AuthPage() {
                                     className="w-full"
                                     onClick={() => handleSignUp(isLogin)}
                                 >
-                                    {isLogin ? "Sign In" : "Create Account"}
+                                    {isLogin ? "Login" : "Create Account"}
                                 </Button>
                             </div>
 
