@@ -1,75 +1,103 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Eye, EyeOff } from "lucide-react"
-import { toast } from "sonner"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { signIn, signUp } from "@/lib/auth-client"
-import Image from "next/image"
-import { sendVerifyEmail } from "./actions"
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { signIn, signUp } from "@/lib/auth-client";
+import Image from "next/image";
 
 export default function AuthPage() {
-    const [isLogin, setIsLogin] = useState(true)
-    const [showPassword, setShowPassword] = useState(false)
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [name, setName] = useState("")
+  const [isLogin, setIsLogin] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
 
-    const handleSignUp = async (isLogin: boolean) => {
-        if (isLogin) {
-            const { data, error } = await signIn.email({
-                email: email,
-                password: password,
-                callbackURL: "/",
-            }, {
-                onRequest: () => {
-                    // TODO: add posthog event
-                    console.log("Signing in...")
-                },
-                onSuccess: () => {
-                    toast.success("Signed in successfully")
-                },
-                onError: (ctx) => {
-                    toast.error(ctx.error.message)
-                }
-            })
-            console.log(data, error)
-        } else {
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
 
-            const { data, error } = await signUp.email({
-                email: email,
-                password: password,
-                name: name,
-                callbackURL: "/",
-            }, {
-                onRequest: () => {
-                    // TODO: add posthog event
-                },
-                onSuccess: () => {
-                    toast.success("Account created successfully")
-                },
-                onError: (ctx) => {
-                    toast.error(ctx.error.message)
-                }
-            })
-            console.log(data, error)
-        }
+    const usernameRegex = /^[a-zA-Z0-9_]+$/;
+    if (!usernameRegex.test(value)) {
+      console.log("Invalid username", value);
+      toast("Invalid username", {
+        description:
+          "Username can only contain letters, numbers, and underscores.",
+      });
+      return;
     }
 
-    return (
-        <div className="min-h-screen">
-            <div className="min-h-screen bg-background transition-colors duration-300">
-                <div className="flex min-h-screen">
-                    {/* Left Side - Image */}
-                    <div className="hidden lg:flex lg:w-1/2 relative bg-card">
-                        <div >
-                            <div className="absolute inset-0 bg-linear-to-br from-accent/40 to-muted z-10"></div>
-                            <Image src="/images/login.jpg" className="object-cover" fill alt="waves in a river, someone just flushed i think" />
-                        </div>
-                        {/* Logo - Top Right */}
-                        {/* <div className="absolute top-6 left-6 z-20">
+    setUsername(value);
+  };
+
+  const handleSignUp = async (isLogin: boolean) => {
+    if (isLogin) {
+      const { data, error } = await signIn.email(
+        {
+          email: email,
+          password: password,
+          callbackURL: "/",
+        },
+        {
+          onRequest: () => {
+            // TODO: add posthog event
+            console.log("Signing in...");
+          },
+          onSuccess: () => {
+            toast.success("Signed in successfully");
+          },
+          onError: (ctx) => {
+            toast.error(ctx.error.message);
+          },
+        }
+      );
+      console.log(data, error);
+    } else {
+      const { data, error } = await signUp.email(
+        {
+          email: email,
+          password: password,
+          name: name,
+          username: username,
+          displayUsername: username,
+          callbackURL: "/",
+        },
+        {
+          onRequest: () => {
+            // TODO: add posthog event
+          },
+          onSuccess: () => {
+            toast.success("Account created successfully, please check your email for verification.");
+          },
+          onError: (ctx) => {
+            toast.error(ctx.error.message);
+          },
+        }
+      );
+      console.log(data, error);
+    }
+  };
+
+  return (
+    <div className="min-h-screen">
+      <div className="min-h-screen bg-background transition-colors duration-300">
+        <div className="flex min-h-screen">
+          {/* Left Side - Image */}
+          <div className="hidden lg:flex lg:w-1/2 relative bg-card">
+            <div>
+              <div className="absolute inset-0 bg-linear-to-br from-accent/40 to-muted z-10"></div>
+              <Image
+                src="/images/login.jpg"
+                className="object-cover"
+                fill
+                alt="waves in a river, someone just flushed i think"
+              />
+            </div>
+            {/* Logo - Top Right */}
+            {/* <div className="absolute top-6 left-6 z-20">
                             <div className="flex items-center space-x-4">
                                 <div className="w-6 h-6 bg-foreground flex items-center justify-center rotate-[15deg]">
                                     <div className="w-3 h-3 bg-background" />
@@ -77,7 +105,7 @@ export default function AuthPage() {
                                 <span className="text-xl font-bold text-foreground">torseek</span>
                             </div>
                         </div> */}
-                        {/* <div className="relative z-10 flex items-center justify-center w-full">
+            {/* <div className="relative z-10 flex items-center justify-center w-full">
                             <div className="text-center space-y-6 px-8">
                                 <div className="w-32 h-32 mx-auto bg-muted rounded-full flex items-center justify-center">
                                     <div className="w-16 h-16 bg-accent rounded-full" />
@@ -90,34 +118,37 @@ export default function AuthPage() {
                                 </div>
                             </div>
                         </div> */}
-                        {/* Quote - Bottom Right */}
-                        <div className="absolute bottom-6 right-6 z-20 max-w-xs">
-                            <blockquote className="text-right">
-                                <p className="text-md italic text-muted-foreground mb-2">
-                                    "Piracy is almost always a service problem and not a pricing problem."
-                                </p>
-                                <cite className="text-sm font-medium text-muted-foreground">— Gabe Newell</cite>
-                            </blockquote>
-                        </div>
-                    </div>
+            {/* Quote - Bottom Right */}
+            <div className="absolute bottom-6 right-6 z-20 max-w-xs">
+              <blockquote className="text-right">
+                <p className="text-md italic text-muted-foreground mb-2">
+                  "Piracy is almost always a service problem and not a pricing
+                  problem."
+                </p>
+                <cite className="text-sm font-medium text-muted-foreground">
+                  — Gabe Newell
+                </cite>
+              </blockquote>
+            </div>
+          </div>
 
-                    {/* Right Side - Form */}
-                    <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
-                        <div className="w-full max-w-md space-y-8">
-                            {/* Header */}
-                            <div className="text-center space-y-2">
-                                <h1 className="text-3xl font-bold text-foreground">
-                                    {isLogin ? "Login" : "Create Account"}
-                                </h1>
-                                <p className="text-muted-foreground">
-                                    {isLogin
-                                        ? "Welcome back! Please sign in to your account"
-                                        : "Get started by creating your new account"}
-                                </p>
-                            </div>
+          {/* Right Side - Form */}
+          <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+            <div className="w-full max-w-md space-y-8">
+              {/* Header */}
+              <div className="text-center space-y-2">
+                <h1 className="text-3xl font-bold text-foreground">
+                  {isLogin ? "Login" : "Create Account"}
+                </h1>
+                <p className="text-muted-foreground">
+                  {isLogin
+                    ? "Welcome back! Please sign in to your account"
+                    : "Get started by creating your new account"}
+                </p>
+              </div>
 
-                            {/* Social Login */}
-                            {/* <div className="space-y-3">
+              {/* Social Login */}
+              {/* <div className="space-y-3">
                                 <Button
                                     variant="outline"
                                     className="w-full border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 bg-transparent"
@@ -164,130 +195,146 @@ export default function AuthPage() {
                                 </div>
                             </div> */}
 
-                            {/* Form */}
-                            <div className="space-y-4">
-                                {!isLogin && (
-                                    <div className="space-y-2">
-                                        <Label htmlFor="name" className="text-foreground">
-                                            Full Name
-                                        </Label>
-                                        <Input
-                                            id="name"
-                                            type="text"
-                                            placeholder="John Doe"
-                                            required
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value)}
-                                        />
-                                    </div>
-                                )}
+              {/* Form */}
+              <div className="space-y-4">
+                {!isLogin && (
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="text-foreground">
+                      Full Name
+                    </Label>
+                    <Input
+                      id="name"
+                      type="text"
+                      placeholder="John Doe"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                )}
 
-                                <div className="space-y-2">
-                                    <Label htmlFor="email" className="text-foreground">
-                                        Email Address
-                                    </Label>
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        placeholder="john@example.com"
-                                        required
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="password" className="text-foreground">
-                                        Password
-                                    </Label>
-                                    <div className="relative">
-                                        <Input
-                                            id="password"
-                                            type={showPassword ? "text" : "password"}
-                                            placeholder="••••••••"
-                                            className="pr-10"
-                                            required
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                        />
-                                        <Button
-                                            type="button"
-                                            variant="ghost"
-                                            size="icon"
-                                            className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent text-muted-foreground"
-                                            onClick={() => setShowPassword(!showPassword)}
-                                        >
-                                            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                                        </Button>
-                                    </div>
-                                </div>
-
-                                {isLogin && (
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center space-x-2">
-                                            <input
-                                                id="remember"
-                                                type="checkbox"
-                                                className="h-4 w-4 rounded border-input accent-primary"
-                                            />
-                                            <Label htmlFor="remember" className="text-sm text-muted-foreground">
-                                                Remember me
-                                            </Label>
-                                        </div>
-                                        <Button
-                                            variant="link"
-                                            className="px-0 text-sm"
-                                        >
-                                            Forgot password?
-                                        </Button>
-                                    </div>
-                                )}
-
-                                <Button
-                                    className="w-full"
-                                    onClick={() => handleSignUp(isLogin)}
-                                >
-                                    {isLogin ? "Login" : "Create Account"}
-                                </Button>
-                            </div>
-
-                            {/* Toggle Form */}
-                            <div className="text-center">
-                                <span className="text-muted-foreground">
-                                    {isLogin ? "Don't have an account? " : "Already have an account? "}
-                                </span>
-                                <Button
-                                    variant="link"
-                                    className="px-0"
-                                    onClick={() => setIsLogin(!isLogin)}
-                                >
-                                    {isLogin ? "Sign up" : "Sign in"}
-                                </Button>
-                            </div>
-
-                            {/* Terms */}
-                            {!isLogin && (
-                                <p className="text-xs text-center text-muted-foreground">
-                                    By creating an account, you agree to our{" "}
-                                    <Button
-                                        variant="link"
-                                        className="px-0 text-xs"
-                                    >
-                                        Terms of Service
-                                    </Button>{" "}
-                                    and{" "}
-                                    <Button
-                                        variant="link"
-                                        className="px-0 text-xs"
-                                    >
-                                        Privacy Policy
-                                    </Button>
-                                </p>
-                            )}
-                        </div>
-                    </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-foreground">
+                    Username
+                  </Label>
+                  <Input
+                    id="username"
+                    type="text"
+                    placeholder="john_doe"
+                    required
+                    value={username}
+                    onChange={handleUsernameChange}
+                  />
                 </div>
+
+                {!isLogin && (
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-foreground">
+                      Email Address
+                    </Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="john@example.com"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-foreground">
+                    Password
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="••••••••"
+                      className="pr-10"
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent text-muted-foreground"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-4 w-4" />
+                      ) : (
+                        <Eye className="h-4 w-4" />
+                      )}
+                    </Button>
+                  </div>
+                </div>
+
+                {isLogin && (
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <input
+                        id="remember"
+                        type="checkbox"
+                        className="h-4 w-4 rounded border-input accent-primary"
+                      />
+                      <Label
+                        htmlFor="remember"
+                        className="text-sm text-muted-foreground"
+                      >
+                        Remember me
+                      </Label>
+                    </div>
+                    <Button variant="link" className="px-0 text-sm">
+                      Forgot password?
+                    </Button>
+                  </div>
+                )}
+
+                <Button
+                  className="w-full"
+                  onClick={() => handleSignUp(isLogin)}
+                >
+                  {isLogin ? "Login" : "Create Account"}
+                </Button>
+              </div>
+
+              {/* Toggle Form */}
+              <div className="text-center">
+                <span className="text-muted-foreground">
+                  {isLogin
+                    ? "Don't have an account? "
+                    : "Already have an account? "}
+                </span>
+                <Button
+                  variant="link"
+                  className="px-0"
+                  onClick={() => setIsLogin(!isLogin)}
+                >
+                  {isLogin ? "Sign up" : "Sign in"}
+                </Button>
+              </div>
+
+              {/* Terms */}
+              {!isLogin && (
+                <p className="text-xs text-center text-muted-foreground">
+                  By creating an account, you agree to our{" "}
+                  <Button variant="link" className="px-0 text-xs">
+                    Terms of Service
+                  </Button>{" "}
+                  and{" "}
+                  <Button variant="link" className="px-0 text-xs">
+                    Privacy Policy
+                  </Button>
+                </p>
+              )}
             </div>
+          </div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
