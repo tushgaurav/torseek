@@ -6,16 +6,23 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signIn, signUp, isUsernameAvailable } from "@/lib/auth-client";
+import { signIn, signUp, isUsernameAvailable, useSession } from "@/lib/auth-client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function AuthPage() {
+  const router = useRouter();
+  const { data: session } = useSession();
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
+
+  if (session) {
+    router.push("/");
+  }
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -35,9 +42,9 @@ export default function AuthPage() {
 
   const handleSignUp = async (isLogin: boolean) => {
     if (isLogin) {
-      const { data, error } = await signIn.email(
+      const { data, error } = await signIn.username(
         {
-          email: email,
+          username: username,
           password: password,
           callbackURL: "/",
         },
