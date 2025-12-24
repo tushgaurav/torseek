@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signIn, signUp } from "@/lib/auth-client";
+import { signIn, signUp, isUsernameAvailable } from "@/lib/auth-client";
 import Image from "next/image";
 
 export default function AuthPage() {
@@ -56,28 +56,41 @@ export default function AuthPage() {
       );
       console.log(data, error);
     } else {
-      const { data, error } = await signUp.email(
-        {
-          email: email,
-          password: password,
-          name: name,
-          username: username,
-          displayUsername: username,
-          callbackURL: "/",
-        },
-        {
-          onRequest: () => {
-            // TODO: add posthog event
+      const { data: response, error } = await isUsernameAvailable({
+        username: username,
+      });
+
+      if (response?.available) {
+        const { data, error } = await signUp.email(
+          {
+            email: email,
+            password: password,
+            name: name,
+            username: username,
+            displayUsername: username,
+            callbackURL: "/",
           },
-          onSuccess: () => {
-            toast.success("Account created successfully, please check your email for verification.");
-          },
-          onError: (ctx) => {
-            toast.error(ctx.error.message);
-          },
-        }
-      );
-      console.log(data, error);
+          {
+            onRequest: () => {
+              // TODO: add posthog event
+            },
+            onSuccess: () => {
+              toast.success(
+                "Account created successfully, please check your email for verification."
+              );
+            },
+            onError: (ctx) => {
+              toast.error(ctx.error.message);
+            },
+          }
+        );
+        console.log(data, error);
+      } else {
+        toast("Username not available!", {
+          description: "Please choose a different username.",
+        });
+        return;
+      }
     }
   };
 
