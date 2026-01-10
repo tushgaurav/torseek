@@ -95,12 +95,12 @@ function NavItemComponent({ item, level = 0 }: NavItemProps) {
 
 export function DocsSidebar() {
   return (
-    <div className="w-64 border-l border-r border border-sidebar-border bg-sidebar">
+    <div className="w-64 bg-sidebar">
       <div className="p-4 border-b border-sidebar-border">
         <h2 className="font-semibold text-sidebar-foreground">Documentation</h2>
       </div>
       <ScrollArea className="h-[calc(100vh-5rem)]">
-        <div className="p-4 space-y-2">
+        <div className="pt-4 p-2 space-y-2">
           {docsNavigation.map((item, index) => (
             <NavItemComponent key={index} item={item} />
           ))}
