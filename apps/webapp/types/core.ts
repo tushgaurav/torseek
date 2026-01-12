@@ -1,7 +1,7 @@
 export type Torrent = {
   title: string;
   dateUploaded: string | Date;
-  size: number;
+  size: bigint;
   seeders: number;
   peers: number;    
   magnetLink: string;
