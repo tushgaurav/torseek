@@ -3,6 +3,7 @@ import {
   text,
   timestamp,
   integer,
+  bigint,
 } from "drizzle-orm/pg-core";
 
 import { user } from "./core";
@@ -12,7 +13,7 @@ export const savedTorrents = pgTable("saved_torrents", {
   id: text("id").primaryKey().default(sql`gen_random_uuid()`),
   title: text("title").notNull(),
   dateUploaded: timestamp("date_uploaded").notNull(),
-  size: integer("size").notNull(),
+  size: bigint("size", { mode: "bigint" }).notNull(),
   seeders: integer("seeders").notNull(),
   peers: integer("peers").notNull(),
   magnetLink: text("magnet_link").notNull(),

@@ -39,7 +39,7 @@ export async function saveTorrent(
           id: "IH-" + torrent.infohash,
           title: torrent.title,
           dateUploaded: new Date(torrent.dateUploaded),
-          size: torrent.size,
+          size: BigInt(torrent.size),
           seeders: torrent.seeders,
           peers: torrent.peers,
           magnetLink: torrent.magnetLink,
@@ -49,11 +49,11 @@ export async function saveTorrent(
 
         await tx.insert(userStats).values({
           userId: session.user.id,
-          totalBookmarks: sql`total_bookmarks + 1`,
+          totalBookmarks: 1,
         }).onConflictDoUpdate({
           target: [userStats.userId],
           set: {
-            totalBookmarks: sql`total_bookmarks + 1`,
+            totalBookmarks: sql`${userStats.totalBookmarks} + 1`,
           },
         });
 
@@ -63,7 +63,7 @@ export async function saveTorrent(
         await tx.delete(savedTorrents).where(eq(savedTorrents.id, "IH-" + torrent.infohash));
 
         await tx.update(userStats).set({
-          totalBookmarks: sql`total_bookmarks - 1`,
+          totalBookmarks: sql`${userStats.totalBookmarks} - 1`,
         }).where(eq(userStats.userId, session.user.id));
       });
     }

@@ -18,7 +18,7 @@ export async function sendVerifyEmail(user: User, verificationUrl: string) {
     body: JSON.stringify({
       to: user.email,
       from: "noreply@torseek.org",
-      subject: "Verify your email",
+      subject: "Verify your email (no seeding required)",
       body: emailHtml,
     }),
   })

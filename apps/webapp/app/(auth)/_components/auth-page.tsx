@@ -57,7 +57,7 @@ export default function AuthPage() {
             toast.success("Signed in successfully");
           },
           onError: (ctx) => {
-            toast.error(ctx.error.message);
+            toast.error(ctx.error.message || "An error occurred while signing in.");
           },
         }
       );
